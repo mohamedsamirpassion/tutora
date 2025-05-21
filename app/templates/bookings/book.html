@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="form-container">
+                <h1 class="text-center mb-4">Book a Placement Test</h1>
+                <p class="text-center mb-4">Select your preferred date and time for your English placement test. Our team will confirm your booking via email.</p>
+                
+                <form method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.booking_date.label(class="form-label") }}
+                            {{ form.booking_date(class="form-control" + (" is-invalid" if form.booking_date.errors else ""), type="date") }}
+                            {% for error in form.booking_date.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.booking_time.label(class="form-label") }}
+                            {{ form.booking_time(class="form-select" + (" is-invalid" if form.booking_time.errors else "")) }}
+                            {% for error in form.booking_time.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.notes.label(class="form-label") }}
+                        {{ form.notes(class="form-control" + (" is-invalid" if form.notes.errors else ""), rows=4, placeholder="Any special requests or additional information...") }}
+                        {% for error in form.notes.errors %}
+                            <div class="invalid-feedback">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+            
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h4 class="card-title">What to Expect</h4>
+                    <p>The placement test will take approximately 60 minutes and includes:</p>
+                    <ul>
+                        <li>A written assessment to evaluate your grammar and vocabulary</li>
+                        <li>A reading comprehension exercise</li>
+                        <li>A short speaking assessment with one of our teachers</li>
+                    </ul>
+                    <p>Based on your results, we'll recommend the most suitable courses for your level and learning goals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

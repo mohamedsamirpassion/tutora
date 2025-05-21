@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Manage Courses</h1>
+        <a href="{{ url_for('admin.new_course') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Add New Course
+        </a>
+    </div>
+    
+    <div class="card border-purple">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Duration</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                            <tr>
+                                <td>{{ course.title }}</td>
+                                <td>{{ course.category }}</td>
+                                <td>{{ course.duration }}</td>
+                                <td>${{ course.price }}</td>
+                                <td>
+                                    {% if course.is_active %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('admin.edit_course', id=course.id) }}" class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-course-id="{{ course.id }}" data-course-title="{{ course.title }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">No courses available. Add your first course!</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Single Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-purple text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the course "<span id="courseTitle"></span>"? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" action="" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the modal
+        const deleteModal = document.getElementById('deleteModal');
+        const courseTitle = document.getElementById('courseTitle');
+        const deleteForm = document.getElementById('deleteForm');
+        
+        // Add event listeners to all delete buttons
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-course-id');
+                const title = this.getAttribute('data-course-title');
+                
+                // Set the course title in the modal
+                courseTitle.textContent = title;
+                
+                // Set the form action
+                deleteForm.action = "{{ url_for('admin.delete_course', id=0) }}".replace('0', id);
+                
+                // Show the modal
+                const modal = new bootstrap.Modal(deleteModal);
+                modal.show();
+            });
+        });
+    });
+</script>
+{% endblock %} 

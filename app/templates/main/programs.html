@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-12">
+            <h1 class="text-center mb-3">Our Programs</h1>
+            <p class="text-center lead">Explore our range of English language programs designed to help you achieve your learning goals.</p>
+        </div>
+    </div>
+    
+    <!-- General English Programs -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-4">General English Program</h2>
+            <p class="mb-4">Our comprehensive General English courses are designed to improve your overall language skills including reading, writing, speaking, and listening.</p>
+        </div>
+        
+        {% if general_english %}
+            {% for course in general_english %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if course.image_url %}
+                            <img src="{{ course.image_url }}" class="card-img-top" alt="{{ course.title }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/course-placeholder.jpg') }}" class="card-img-top" alt="{{ course.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.title }}</h5>
+                            <p class="card-text">{{ course.description|truncate(100) }}</p>
+                            <p><strong>Duration:</strong> {{ course.duration }}</p>
+                            <p class="card-price mb-3">${{ course.price }}</p>
+                            <a href="{{ url_for('courses.detail', id=course.id) }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">No General English courses available at the moment.</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    <!-- Conversation Classes -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-4">Conversation Classes</h2>
+            <p class="mb-4">Focus on improving your speaking skills with our conversation classes. Practice real-life scenarios and gain confidence in your English communication.</p>
+        </div>
+        
+        {% if conversation %}
+            {% for course in conversation %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if course.image_url %}
+                            <img src="{{ course.image_url }}" class="card-img-top" alt="{{ course.title }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/course-placeholder.jpg') }}" class="card-img-top" alt="{{ course.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.title }}</h5>
+                            <p class="card-text">{{ course.description|truncate(100) }}</p>
+                            <p><strong>Duration:</strong> {{ course.duration }}</p>
+                            <p class="card-price mb-3">${{ course.price }}</p>
+                            <a href="{{ url_for('courses.detail', id=course.id) }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">No Conversation courses available at the moment.</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    <!-- Phonetics Classes -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-4">Phonetics and Pronunciation Classes</h2>
+            <p class="mb-4">Perfect your English pronunciation with our specialized phonetics courses. Learn to speak clearly and confidently with proper intonation and rhythm.</p>
+        </div>
+        
+        {% if phonetics %}
+            {% for course in phonetics %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if course.image_url %}
+                            <img src="{{ course.image_url }}" class="card-img-top" alt="{{ course.title }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/course-placeholder.jpg') }}" class="card-img-top" alt="{{ course.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.title }}</h5>
+                            <p class="card-text">{{ course.description|truncate(100) }}</p>
+                            <p><strong>Duration:</strong> {{ course.duration }}</p>
+                            <p class="card-price mb-3">${{ course.price }}</p>
+                            <a href="{{ url_for('courses.detail', id=course.id) }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">No Phonetics courses available at the moment.</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    <!-- Call to Action -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3 class="mb-3">Not sure which program is right for you?</h3>
+            <p class="mb-4">Take our placement test to determine your current level and get personalized recommendations.</p>
+            <a href="{{ url_for('bookings.book_placement_test') }}" class="btn btn-primary btn-lg">Book Placement Test</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

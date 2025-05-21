@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="mb-3">About Tutora</h1>
+            <p class="lead">Dedicated to helping students achieve their language learning goals.</p>
+        </div>
+    </div>
+    
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <h2 class="mb-4">Our Story</h2>
+            <p>Tutora was founded with a simple mission: to provide high-quality English language education that is accessible, effective, and personalized. Our team of experienced educators recognized the need for a more flexible approach to language learning that caters to the diverse needs of students around the world.</p>
+            <p>Since our establishment, we have helped thousands of students improve their English skills and achieve their personal and professional goals. Our commitment to excellence and student success has made us a trusted name in online language education.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <img src="{{ url_for('static', filename='images/about-image.jpg') }}" class="card-img-top" alt="About Tutora">
+                <div class="card-body">
+                    <h5 class="card-title">Our Values</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Excellence:</strong> We strive for the highest standards in teaching and learning.</li>
+                        <li class="list-group-item"><strong>Personalization:</strong> We recognize that each student has unique needs and goals.</li>
+                        <li class="list-group-item"><strong>Innovation:</strong> We embrace new technologies and teaching methods.</li>
+                        <li class="list-group-item"><strong>Support:</strong> We provide comprehensive support to all our students.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-4 text-center">Our Approach</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-box">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h4>Expert Instruction</h4>
+                <p>Our teachers are certified professionals with years of experience in teaching English as a second language.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-box">
+                <i class="fas fa-users"></i>
+                <h4>Small Class Sizes</h4>
+                <p>We maintain small class sizes to ensure that each student receives personalized attention and feedback.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-box">
+                <i class="fas fa-laptop-house"></i>
+                <h4>Flexible Learning</h4>
+                <p>Our online platform allows students to learn at their own pace and according to their own schedule.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3 class="mb-3">Ready to start your English learning journey?</h3>
+            <p class="mb-4">Take our placement test to determine your current level and get personalized course recommendations.</p>
+            <a href="{{ url_for('bookings.book_placement_test') }}" class="btn btn-primary btn-lg">Book Placement Test</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

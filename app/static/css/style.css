@@ -1,0 +1,208 @@
+/* Custom styles for Tutora website */
+
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000;
+    background-color: #f8f9fa;
+}
+
+/* Navbar styles */
+.navbar-brand .fs-4 {
+    color: #79388a;
+    letter-spacing: 1px;
+}
+
+.navbar {
+    padding: 0.8rem 1rem;
+}
+
+/* Logo styles */
+.navbar-logo {
+    max-height: 100px;
+    width: auto;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/static/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 8rem 0;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* Card styles */
+.card {
+    border: 1px solid #79388a;
+    box-shadow: 0 0.5rem 1rem rgba(121, 56, 138, 0.1);
+    transition: transform 0.3s;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: #79388a;
+    font-weight: 600;
+}
+
+.card-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #79388a;
+}
+
+/* Feature boxes */
+.feature-box {
+    padding: 2rem;
+    text-align: center;
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 1px solid #79388a;
+    box-shadow: 0 0.5rem 1rem rgba(121, 56, 138, 0.1);
+    margin-bottom: 2rem;
+}
+
+.feature-box i {
+    font-size: 2.5rem;
+    color: #79388a;
+    margin-bottom: 1rem;
+}
+
+/* Form styles */
+.form-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #79388a;
+    box-shadow: 0 0.5rem 1rem rgba(121, 56, 138, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    padding: 0.5rem 1.5rem;
+    background-color: #79388a;
+    border-color: #79388a;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #662d74;
+    border-color: #662d74;
+}
+
+.btn-outline-primary {
+    border-color: #79388a;
+    color: #79388a;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background-color: #79388a;
+    color: white;
+}
+
+.btn-outline-light {
+    border-width: 2px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #79388a;
+}
+
+footer a:hover {
+    color: #ffffff !important;
+}
+
+.hover-white:hover {
+    color: #ffffff !important;
+    transition: color 0.2s;
+}
+
+/* Admin dashboard */
+.admin-stat-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border: 1px solid #79388a;
+    box-shadow: 0 0.5rem 1rem rgba(121, 56, 138, 0.1);
+    text-align: center;
+}
+
+.admin-stat-card i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #79388a;
+}
+
+.admin-stat-card h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Booking status badges */
+.badge-pending {
+    background-color: #ffc107;
+    color: #000000;
+}
+
+.badge-confirmed {
+    background-color: #79388a;
+    color: white;
+}
+
+.badge-cancelled {
+    background-color: #dc3545;
+    color: white;
+}
+
+.badge-completed {
+    background-color: #79388a;
+    color: white;
+}
+
+/* Custom color classes */
+.bg-purple {
+    background-color: #79388a !important;
+}
+
+.text-purple {
+    color: #79388a !important;
+}
+
+.border-purple {
+    border-color: #79388a !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero {
+        padding: 5rem 0;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+} 

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="mb-4">
+                <h1 class="mb-3">{{ course.title }}</h1>
+                <p class="lead">{{ course.category }}</p>
+                <hr>
+                <div class="mb-4">
+                    <h4>Course Description</h4>
+                    <p>{{ course.description }}</p>
+                </div>
+                <div class="mb-4">
+                    <h4>What You'll Learn</h4>
+                    <ul>
+                        <li>Improve your overall English language proficiency</li>
+                        <li>Develop confidence in speaking and writing</li>
+                        <li>Learn from experienced and qualified instructors</li>
+                        <li>Receive personalized feedback on your progress</li>
+                        <li>Access online learning materials and resources</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                {% if course.image_url %}
+                    <img src="{{ course.image_url }}" class="card-img-top" alt="{{ course.title }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/course-placeholder.jpg') }}" class="card-img-top" alt="{{ course.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-price mb-3">${{ course.price }}</h5>
+                    <p><strong>Duration:</strong> {{ course.duration }}</p>
+                    
+                    {% if current_user.is_authenticated %}
+                        <form action="{{ url_for('courses.enroll', id=course.id) }}" method="post">
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Enroll Now</button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login to Enroll</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">Not sure if this is the right level?</h5>
+                    <p class="card-text">Take our placement test to determine your current English level.</p>
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('bookings.book_placement_test') }}" class="btn btn-outline-primary">Book Placement Test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

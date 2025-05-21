@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1>Welcome to Tutora</h1>
+        <p>Enhance your English language skills with our expert instructors and personalized learning approach.</p>
+        <div>
+            <a href="{{ url_for('main.programs') }}" class="btn btn-primary btn-lg me-2">Explore Programs</a>
+            <a href="{{ url_for('bookings.book_placement_test') }}" class="btn btn-outline-light btn-lg">Book Placement Test</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Courses -->
+<section class="container mb-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Featured Programs</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% if featured_courses %}
+            {% for course in featured_courses %}
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        {% if course.image_url %}
+                            <img src="{{ course.image_url }}" class="card-img-top" alt="{{ course.title }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/course-placeholder.jpg') }}" class="card-img-top" alt="{{ course.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.title }}</h5>
+                            <p class="card-text">{{ course.description|truncate(100) }}</p>
+                            <p class="card-price mb-3">${{ course.price }}</p>
+                            <a href="{{ url_for('courses.detail', id=course.id) }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">No courses available at the moment. Please check back later.</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('main.programs') }}" class="btn btn-outline-primary">View All Programs</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container mb-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Why Choose Tutora?</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="feature-box">
+                <i class="fas fa-user-graduate"></i>
+                <h4>Expert Instructors</h4>
+                <p>Learn from qualified and experienced English language teachers who are passionate about helping you succeed.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <i class="fas fa-laptop"></i>
+                <h4>Online Learning</h4>
+                <p>Access our courses from anywhere in the world with our flexible online learning platform.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <i class="fas fa-certificate"></i>
+                <h4>Personalized Approach</h4>
+                <p>Receive individualized attention and feedback to help you reach your language learning goals.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="bg-primary text-white py-5 mb-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to start your English learning journey?</h2>
+        <p class="mb-4">Take our placement test to determine your current level and get personalized course recommendations.</p>
+        <a href="{{ url_for('bookings.book_placement_test') }}" class="btn btn-light btn-lg">Book Your Placement Test Now</a>
+    </div>
+</section>
+{% endblock %} 
