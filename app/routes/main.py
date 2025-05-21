@@ -1,5 +1,8 @@
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, flash, redirect, url_for, request
 from app.models.course import Course
+from app.models.message import Message
+from app.forms.message_forms import ContactForm
+from app import db
 
 bp = Blueprint('main', __name__)
 
@@ -38,6 +41,18 @@ def programs():
                           conversation=conversation,
                           phonetics=phonetics)
 
-@bp.route('/contact')
+@bp.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('main/contact.html', title='Contact Us') 
+    form = ContactForm()
+    if form.validate_on_submit():
+        message = Message(
+            name=form.name.data,
+            email=form.email.data,
+            subject=form.subject.data,
+            message=form.message.data
+        )
+        db.session.add(message)
+        db.session.commit()
+        flash('Your message has been sent! We will get back to you soon.', 'success')
+        return redirect(url_for('main.contact'))
+    return render_template('main/contact.html', title='Contact Us', form=form) 

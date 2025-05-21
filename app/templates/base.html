@@ -57,6 +57,18 @@
                                 {{ current_user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
+                                {% if current_user.is_administrator %}
+                                    <li><a class="dropdown-item" href="{{ url_for('admin.index') }}">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('admin.courses') }}">Manage Courses</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('admin.bookings') }}">Manage Bookings</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('admin.messages') }}">Messages
+                                        {% set unread = get_unread_message_count() %}
+                                        {% if unread > 0 %}
+                                            <span class="badge bg-danger">{{ unread }}</span>
+                                        {% endif %}
+                                    </a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                {% endif %}
                                 <li><a class="dropdown-item" href="{{ url_for('courses.my_courses') }}">My Courses</a></li>
                                 <li><a class="dropdown-item" href="{{ url_for('bookings.my_bookings') }}">My Bookings</a></li>
                                 <li><hr class="dropdown-divider"></li>

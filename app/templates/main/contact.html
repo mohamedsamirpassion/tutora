@@ -14,25 +14,46 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h3 class="card-title mb-4">Get in Touch</h3>
-                    <form>
+                    <form method="post" novalidate>
+                        {{ form.hidden_tag() }}
                         <div class="mb-3">
-                            <label for="name" class="form-label">Your Name</label>
-                            <input type="text" class="form-control" id="name" required>
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                            {% for error in form.name.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" required>
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                            {% for error in form.email.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="mb-3">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="subject" required>
+                            {{ form.subject.label(class="form-label") }}
+                            {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else "")) }}
+                            {% for error in form.subject.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                            {{ form.message.label(class="form-label") }}
+                            {{ form.message(class="form-control" + (" is-invalid" if form.message.errors else ""), rows=5) }}
+                            {% for error in form.message.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            {{ form.submit(class="btn btn-primary") }}
                         </div>
                     </form>
                 </div>
@@ -45,15 +66,15 @@
                     <h3 class="card-title mb-4">Contact Information</h3>
                     <div class="mb-4">
                         <h5><i class="fas fa-map-marker-alt me-2 text-primary"></i> Address</h5>
-                        <p>123 Education Street<br>City, State 12345<br>Country</p>
+                        <p>Cairo, Egypt</p>
                     </div>
                     <div class="mb-4">
                         <h5><i class="fas fa-phone me-2 text-primary"></i> Phone</h5>
-                        <p>+1 (555) 123-4567</p>
+                        <p>010 051758137</p>
                     </div>
                     <div class="mb-4">
                         <h5><i class="fas fa-envelope me-2 text-primary"></i> Email</h5>
-                        <p>info@tutora.com</p>
+                        <p>tutoracommunity1@gmail.com</p>
                     </div>
                     <div class="mb-4">
                         <h5><i class="fas fa-clock me-2 text-primary"></i> Office Hours</h5>

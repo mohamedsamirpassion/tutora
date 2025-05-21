@@ -7,6 +7,7 @@ from app import db
 from app.models.user import User
 from app.models.course import Course
 from app.models.booking import Booking
+from app.models.message import Message
 from app.forms.course_forms import CourseForm
 from app.forms.booking_forms import AdminBookingForm
 
@@ -26,16 +27,18 @@ def admin_required(func):
 @login_required
 @admin_required
 def index():
-    # Count of users, courses, pending bookings
+    # Count of users, courses, pending bookings, unread messages
     user_count = User.query.count()
     course_count = Course.query.count()
     pending_bookings = Booking.query.filter_by(status='pending').count()
+    unread_messages = Message.query.filter_by(read=False).count()
     
     return render_template('admin/index.html', 
                           title='Admin Dashboard',
                           user_count=user_count,
                           course_count=course_count,
-                          pending_bookings=pending_bookings)
+                          pending_bookings=pending_bookings,
+                          unread_messages=unread_messages)
 
 # Course Management
 @bp.route('/courses')
@@ -145,4 +148,38 @@ def edit_booking(id):
                           title='Edit Booking', 
                           form=form, 
                           booking=booking,
-                          user=user) 
+                          user=user)
+
+@bp.route('/messages')
+@login_required
+@admin_required
+def messages():
+    messages = Message.query.order_by(Message.created_at.desc()).all()
+    return render_template('admin/messages/index.html', 
+                          title='Contact Messages',
+                          messages=messages)
+
+@bp.route('/messages/<int:id>')
+@login_required
+@admin_required
+def view_message(id):
+    message = Message.query.get_or_404(id)
+    
+    # Mark as read if it wasn't already
+    if not message.read:
+        message.read = True
+        db.session.commit()
+        
+    return render_template('admin/messages/view.html', 
+                          title='View Message',
+                          message=message)
+
+@bp.route('/messages/<int:id>/delete', methods=['POST'])
+@login_required
+@admin_required
+def delete_message(id):
+    message = Message.query.get_or_404(id)
+    db.session.delete(message)
+    db.session.commit()
+    flash('Message has been deleted.', 'success')
+    return redirect(url_for('admin.messages')) 

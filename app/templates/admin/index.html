@@ -6,25 +6,32 @@
     
     <!-- Stats Overview -->
     <div class="row mb-5">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="admin-stat-card">
                 <i class="fas fa-users"></i>
                 <h2>{{ user_count }}</h2>
                 <p>Registered Users</p>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="admin-stat-card">
                 <i class="fas fa-book"></i>
                 <h2>{{ course_count }}</h2>
                 <p>Active Courses</p>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="admin-stat-card">
                 <i class="fas fa-calendar-check"></i>
                 <h2>{{ pending_bookings }}</h2>
                 <p>Pending Bookings</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="admin-stat-card">
+                <i class="fas fa-envelope"></i>
+                <h2>{{ unread_messages }}</h2>
+                <p>Unread Messages</p>
             </div>
         </div>
     </div>
@@ -34,7 +41,7 @@
         <div class="col-12">
             <h3 class="mb-4">Quick Actions</h3>
         </div>
-        <div class="col-md-6 mb-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Manage Courses</h5>
@@ -43,12 +50,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mb-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Manage Bookings</h5>
                     <p class="card-text">View and update placement test bookings.</p>
                     <a href="{{ url_for('admin.bookings') }}" class="btn btn-primary">Go to Bookings</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Contact Messages</h5>
+                    <p class="card-text">View and respond to messages from students.</p>
+                    <a href="{{ url_for('admin.messages') }}" class="btn btn-primary">Go to Messages</a>
                 </div>
             </div>
         </div>

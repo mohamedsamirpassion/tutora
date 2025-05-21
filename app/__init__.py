@@ -11,6 +11,7 @@ migrate = Migrate()
 login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message = 'Please log in to access this page.'
+login.login_message_category = 'info'
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -24,6 +25,16 @@ def create_app(config_class=Config):
     @app.context_processor
     def inject_now():
         return {'now': datetime.utcnow()}
+    
+    @app.context_processor
+    def utility_processor():
+        def get_unread_message_count():
+            from app.models.message import Message
+            from flask_login import current_user
+            if current_user.is_authenticated and current_user.is_administrator:
+                return Message.query.filter_by(read=False).count()
+            return 0
+        return dict(get_unread_message_count=get_unread_message_count)
     
     from app.routes.main import bp as main_bp
     app.register_blueprint(main_bp)
@@ -42,4 +53,4 @@ def create_app(config_class=Config):
     
     return app
 
-from app import models 
+from app.models import user, course, booking, message 
